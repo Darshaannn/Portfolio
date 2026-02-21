@@ -14,11 +14,12 @@ const Cursor = () => {
         };
 
         const handleMouseOver = (e) => {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('.interactive')) {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
-            }
+            const isClickable = e.target.tagName === 'A' ||
+                e.target.tagName === 'BUTTON' ||
+                e.target.closest('a') ||
+                e.target.closest('button') ||
+                e.target.closest('.interactive');
+            setIsHovering(!!isClickable);
         };
 
         window.addEventListener("mousemove", mouseMove);
@@ -30,32 +31,35 @@ const Cursor = () => {
         };
     }, []);
 
-    const variants = {
-        default: {
-            x: mousePosition.x - 16,
-            y: mousePosition.y - 16,
-            height: 32,
-            width: 32,
-            backgroundColor: "var(--color-brand-accent)",
-            mixBlendMode: "difference"
-        },
-        hover: {
-            x: mousePosition.x - 32,
-            y: mousePosition.y - 32,
-            height: 64,
-            width: 64,
-            backgroundColor: "var(--color-brand-cream)",
-            mixBlendMode: "difference"
-        }
-    };
-
     return (
-        <motion.div
-            className="fixed top-0 left-0 rounded-full pointer-events-none z-[10000]"
-            variants={variants}
-            animate={isHovering ? "hover" : "default"}
-            transition={{ type: "spring", stiffness: 500, damping: 28 }}
-        />
+        <>
+            {/* Core Dot */}
+            <motion.div
+                className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[10000]"
+                animate={{
+                    x: mousePosition.x - 4,
+                    y: mousePosition.y - 4,
+                    scale: isHovering ? 0 : 1
+                }}
+                transition={{ type: "spring", stiffness: 1000, damping: 50, mass: 0.1 }}
+            />
+
+            {/* Soft Glow Trail */}
+            <motion.div
+                className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9999]"
+                style={{
+                    background: 'radial-gradient(circle, rgba(0,255,255,0.4) 0%, rgba(0,255,255,0) 70%)',
+                    mixBlendMode: 'screen'
+                }}
+                animate={{
+                    x: mousePosition.x - 16,
+                    y: mousePosition.y - 16,
+                    scale: isHovering ? 1.5 : 1,
+                    opacity: isHovering ? 0.8 : 0.5
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 28, mass: 0.5 }}
+            />
+        </>
     );
 };
 

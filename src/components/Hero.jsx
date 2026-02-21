@@ -61,6 +61,32 @@ const Hero = () => {
                     DARSHAN
                 </motion.h1>
             </div>
+
+            {/* CTA Buttons */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
+                className="absolute bottom-12 md:bottom-20 w-full flex justify-center gap-16 md:gap-[32rem] px-4 pointer-events-none"
+            >
+                {/* Resume Button */}
+                <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="pointer-events-auto w-36 md:w-48 py-3 md:py-4 border border-white/30 backdrop-blur-sm text-[var(--color-brand-cream)] text-center font-sans tracking-[0.2em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-all duration-500 rounded-sm"
+                >
+                    Resume
+                </a>
+
+                {/* Connect Button */}
+                <a
+                    href="#contact"
+                    className="pointer-events-auto w-36 md:w-48 py-3 md:py-4 border border-white/30 backdrop-blur-sm text-[var(--color-brand-cream)] text-center font-sans tracking-[0.2em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-all duration-500 rounded-sm hover:-translate-y-1"
+                >
+                    Connect
+                </a>
+            </motion.div>
         </section>
     );
 };

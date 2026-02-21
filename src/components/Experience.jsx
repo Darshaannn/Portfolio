@@ -1,77 +1,158 @@
 import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
-const SchoolIcon = () => (
-    <svg viewBox="0 0 100 100" className="w-32 h-32 md:w-56 md:h-56 stroke-white stroke-[1.5px] fill-none overflow-visible" style={{ strokeLinecap: 'round', strokeLinejoin: 'round', filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.6))' }}>
-        <circle cx="50" cy="50" r="10" />
-        <circle cx="50" cy="50" r="4" opacity="0.6" />
-        <path d="M42 42 L25 25" />
-        <rect x="15" y="15" width="15" height="15" transform="rotate(45 22.5 22.5)" />
-        <path d="M18 18 L12 12 M27 27 L33 33" opacity="0.5" />
-        <path d="M58 58 L75 75" />
-        <rect x="65" y="65" width="15" height="15" transform="rotate(45 72.5 72.5)" />
-        <path d="M68 68 L62 62 M77 77 L82 82" opacity="0.5" />
-        <path d="M58 42 L75 25" />
-        <rect x="65" y="15" width="15" height="15" transform="rotate(-45 72.5 22.5)" />
-        <path d="M42 58 L25 75" />
-        <rect x="15" y="65" width="15" height="15" transform="rotate(-45 22.5 72.5)" />
-        <path d="M75 15 L95 25 M65 25 L85 35 M85 75 L95 65 M75 85 L85 75" strokeDasharray="2 2" opacity="0.7" />
-        <path d="M25 85 L5 75 M35 75 L15 65 M15 25 L5 35 M25 15 L15 25" strokeDasharray="2 2" opacity="0.7" />
-    </svg>
+const SchoolStation = () => (
+    <div className="relative w-48 h-48 md:w-72 md:h-72 flex justify-center items-center">
+        {/* Blinking lights */}
+        <div className="absolute top-[20%] left-[30%] w-1.5 h-1.5 bg-[var(--color-brand-neon-cyan)] rounded-full animate-pulse shadow-[0_0_8px_var(--color-brand-neon-cyan)]"></div>
+        <div className="absolute bottom-[30%] right-[25%] w-1 h-1 bg-[var(--color-brand-accent)] rounded-full animate-ping shadow-[0_0_5px_var(--color-brand-accent)]" style={{ animationDuration: '3s' }}></div>
+
+        <svg viewBox="0 0 200 200" className="w-full h-full stroke-white fill-none overflow-visible neon-glow-cyan drop-shadow-lg" style={{ strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }}>
+            <motion.g animate={{ rotate: 360 }} transition={{ duration: 120, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "center" }}>
+                {/* Outer Ring System */}
+                <ellipse cx="100" cy="100" rx="90" ry="30" strokeDasharray="4 8" opacity="0.4" />
+                <ellipse cx="100" cy="100" rx="85" ry="25" opacity="0.2" />
+                <path d="M 10 100 A 90 30 0 0 0 190 100" strokeDasharray="1 15" strokeWidth="3" opacity="0.6" />
+
+                {/* Core Station */}
+                <circle cx="100" cy="100" r="25" opacity="0.8" />
+                <circle cx="100" cy="100" r="15" />
+                <circle cx="100" cy="100" r="5" fill="white" className="neon-glow-cyan" />
+
+                {/* Connecting structures */}
+                <path d="M100 75 L100 40 M100 125 L100 160" />
+                <path d="M75 100 L40 100 M125 100 L160 100" opacity="0.5" />
+                <path d="M82 82 L60 60 M118 118 L140 140" strokeDasharray="2 4" />
+
+                {/* Solar Panels / Modules */}
+                <rect x="90" y="30" width="20" height="10" />
+                <rect x="90" y="160" width="20" height="10" />
+                <rect x="25" y="95" width="15" height="10" />
+                <rect x="160" y="95" width="15" height="10" />
+                <path d="M85 35 L70 35 M115 35 L130 35" opacity="0.6" />
+                <path d="M85 165 L70 165 M115 165 L130 165" opacity="0.6" />
+
+                {/* Details */}
+                <path d="M95 95 L105 105 M105 95 L95 105" opacity="0.4" />
+                <circle cx="70" cy="70" r="2" opacity="0.8" />
+                <circle cx="130" cy="130" r="2" opacity="0.8" />
+            </motion.g>
+        </svg>
+    </div>
 );
 
-const CollegeIcon = () => (
-    <svg viewBox="0 0 100 100" className="w-32 h-32 md:w-56 md:h-56 stroke-white stroke-[1.5px] fill-none overflow-visible" style={{ strokeLinecap: 'round', strokeLinejoin: 'round', filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.6))' }}>
-        <path d="M45 10 L55 10 L52 40 L48 40 Z" />
-        <circle cx="50" cy="45" r="8" />
-        <ellipse cx="50" cy="65" rx="40" ry="12" />
-        <ellipse cx="50" cy="65" rx="35" ry="8" opacity="0.5" />
-        <path d="M42 45 L20 65 M58 45 L80 65" opacity="0.5" />
-        <path d="M15 30 C 10 50 15 80 25 95 L 30 90 C 20 75 20 45 25 30 Z" />
-        <path d="M85 30 C 90 50 85 80 75 95 L 70 90 C 80 75 80 45 75 30 Z" />
-        <path d="M50 77 L50 90 L45 90 L45 77 Z M55 77 L55 90 L60 90 L60 77 Z" opacity="0.7" />
-        <path d="M20 60 L30 65 M80 60 L70 65 M85 45 L75 50 M15 45 L25 50" opacity="0.4" />
-    </svg>
+const CollegeStation = () => (
+    <div className="relative w-48 h-48 md:w-[320px] md:h-[320px] flex justify-center items-center">
+        {/* Blinking lights */}
+        <div className="absolute top-[40%] right-[20%] w-1.5 h-1.5 bg-[var(--color-brand-neon-pink)] rounded-full animate-pulse shadow-[0_0_10px_var(--color-brand-neon-pink)]" style={{ animationDuration: '2s' }}></div>
+        <div className="absolute bottom-[20%] left-[35%] w-1.5 h-1.5 bg-white rounded-full animate-pulse shadow-[0_0_8px_white]" style={{ animationDuration: '4s' }}></div>
+
+        <svg viewBox="0 0 200 200" className="w-full h-full stroke-white fill-none overflow-visible neon-glow-cyan drop-shadow-xl" style={{ strokeWidth: '1.2', strokeLinecap: 'round', strokeLinejoin: 'round' }}>
+            <motion.g animate={{ rotate: -360 }} transition={{ duration: 150, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "center" }}>
+                {/* Base Structure */}
+                <path d="M70 50 L130 50 L140 150 L60 150 Z" opacity="0.3" />
+                <path d="M80 50 L120 50 L130 150 L70 150 Z" />
+                <path d="M95 50 L105 50 L115 150 L85 150 Z" opacity="0.7" />
+
+                {/* Connecting Rings */}
+                <ellipse cx="100" cy="80" rx="45" ry="12" />
+                <ellipse cx="100" cy="120" rx="55" ry="15" />
+                <ellipse cx="100" cy="80" rx="60" ry="16" strokeDasharray="4 6" opacity="0.5" />
+                <ellipse cx="100" cy="120" rx="75" ry="20" strokeDasharray="2 8" opacity="0.6" />
+
+                {/* Details */}
+                <line x1="100" y1="20" x2="100" y2="50" />
+                <circle cx="100" cy="20" r="3" fill="var(--color-brand-accent)" stroke="none" className="neon-glow-orange" />
+                <path d="M60 150 L40 170 M140 150 L160 170" opacity="0.6" />
+                <circle cx="40" cy="170" r="4" opacity="0.5" />
+                <circle cx="160" cy="170" r="4" opacity="0.5" />
+
+                <path d="M85 90 L115 90 M85 100 L115 100 M85 110 L115 110" opacity="0.4" />
+                <path d="M65 130 L135 130 M60 140 L140 140" strokeDasharray="1 3" />
+            </motion.g>
+        </svg>
+    </div>
 );
 
-const InternshipIcon = () => (
-    <svg viewBox="0 0 100 100" className="w-36 h-36 md:w-60 md:h-60 stroke-white stroke-[1.5px] fill-none overflow-visible" style={{ strokeLinecap: 'round', strokeLinejoin: 'round', filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.6))' }}>
-        <rect x="5" y="47" width="8" height="6" rx="2" opacity="0.4" />
-        <rect x="18" y="45" width="12" height="10" rx="3" opacity="0.6" />
-        <path d="M13 50 L18 50 M30 50 L35 50" opacity="0.5" />
-        <path d="M35 40 L85 40 A5 10 0 0 1 85 60 L35 60 A5 10 0 0 1 35 40 Z" />
-        <path d="M85 40 A5 10 0 0 0 85 60" opacity="0.5" />
-        <path d="M45 40 L45 60 M60 40 L60 60 M75 40 L75 60" opacity="0.5" />
-        <rect x="48" y="42" width="5" height="3" />
-        <rect x="65" y="52" width="6" height="4" />
-        <path d="M38 50 L42 50 M80 50 L83 50 M45 45 L60 45" strokeDasharray="1 2" opacity="0.7" />
-        <ellipse cx="55" cy="50" rx="6" ry="30" strokeDasharray="10 5" />
-        <ellipse cx="55" cy="50" rx="4" ry="25" opacity="0.4" />
-        <ellipse cx="65" cy="50" rx="5" ry="20" strokeDasharray="8 6" opacity="0.8" />
-        <circle cx="50" cy="15" r="0.5" />
-        <circle cx="60" cy="85" r="0.5" />
-        <path d="M30 25 L32 26 M70 18 L73 17 M65 80 L68 78 M40 82 L42 80" opacity="0.5" />
-    </svg>
+const InternshipStation = () => (
+    <div className="relative w-56 h-56 md:w-[350px] md:h-[350px] flex justify-center items-center">
+        {/* Blinking lights */}
+        <div className="absolute top-[30%] left-[45%] w-2 h-2 bg-[var(--color-brand-accent)] rounded-full animate-pulse shadow-[0_0_12px_var(--color-brand-accent)]"></div>
+        <div className="absolute bottom-[40%] right-[30%] w-1.5 h-1.5 bg-[var(--color-brand-neon-cyan)] rounded-full animate-ping shadow-[0_0_8px_var(--color-brand-neon-cyan)]" style={{ animationDuration: '2.5s' }}></div>
+
+        <svg viewBox="0 0 200 200" className="w-full h-full stroke-white fill-none overflow-visible neon-glow-cyan drop-shadow-2xl" style={{ strokeWidth: '1.2', strokeLinecap: 'round', strokeLinejoin: 'round' }}>
+            <motion.g animate={{ rotate: 360 }} transition={{ duration: 180, repeat: Infinity, ease: "linear" }} style={{ transformOrigin: "center" }}>
+                {/* Complex Orbital Structure */}
+                <circle cx="100" cy="100" r="60" strokeDasharray="10 5" opacity="0.4" />
+                <circle cx="100" cy="100" r="45" opacity="0.6" />
+                <circle cx="100" cy="100" r="12" fill="rgba(255,255,255,0.1)" />
+
+                {/* Hexagonal Core */}
+                <path d="M100 80 L117 90 L117 110 L100 120 L83 110 L83 90 Z" strokeWidth="2" />
+                <path d="M100 85 L113 93 L113 107 L100 115 L87 107 L87 93 Z" opacity="0.5" />
+
+                {/* Spokes & Nodes */}
+                <path d="M100 40 L100 80 M100 120 L100 160" />
+                <path d="M48 70 L83 90 M117 110 L152 130" />
+                <path d="M48 130 L83 110 M117 90 L152 70" />
+
+                {/* Outer Nodes */}
+                <circle cx="100" cy="40" r="8" />
+                <circle cx="100" cy="160" r="8" />
+                <circle cx="48" cy="70" r="6" opacity="0.7" />
+                <circle cx="152" cy="130" r="6" opacity="0.7" />
+                <circle cx="48" cy="130" r="6" opacity="0.7" />
+                <circle cx="152" cy="70" r="6" opacity="0.7" />
+
+                {/* Tech Accents */}
+                <path d="M85 40 L115 40 M85 160 L115 160" strokeDasharray="2 2" />
+                <circle cx="100" cy="100" r="3" fill="var(--color-brand-neon-cyan)" stroke="none" className="neon-glow-cyan" />
+            </motion.g>
+        </svg>
+    </div>
 );
 
-const SpaceshipIcon = () => (
-    <svg viewBox="0 0 120 120" className="w-20 h-20 md:w-32 md:h-32 stroke-white stroke-[2px] fill-none overflow-visible" style={{ strokeLinecap: 'round', strokeLinejoin: 'round', filter: 'drop-shadow(0 0 8px rgba(0, 234, 255, 0.8))' }}>
-        <path d="M60 10 C 80 40 75 80 60 95 C 45 80 40 40 60 10 Z" />
-        <path d="M58 12 C 76 40 71 78 60 91 C 49 78 44 40 58 12 Z" opacity="0.4" />
-        <path d="M60 25 L60 90" strokeDasharray="2 4" opacity="0.5" />
-        <path d="M60 30 C 65 35 65 45 60 50 C 55 45 55 35 60 30 Z" />
-        <path d="M62 33 C 64 38 64 42 60 47" opacity="0.6" />
-        <path d="M45 60 L15 85 L42 80 Z" />
-        <path d="M75 60 L105 85 L78 80 Z" />
-        <path d="M48 68 L25 83 L44 78 Z" opacity="0.3" />
-        <path d="M72 68 L95 83 L76 78 Z" opacity="0.3" />
-        <path d="M50 65 L70 65 M52 72 L68 72 M55 79 L65 79" opacity="0.5" />
-        <circle cx="48" cy="85" r="2" />
-        <circle cx="72" cy="85" r="2" />
-        <path d="M52 95 L60 115 L68 95 Z" stroke="#ff8a00" />
-        <path d="M55 95 L60 108 L65 95 Z" stroke="#fff" opacity="0.8" />
-        <path d="M50 115 L60 125 L70 115" stroke="rgba(255, 138, 0, 0.5)" strokeDasharray="2 2" />
-    </svg>
+const Spaceship = () => (
+    <div className="relative w-24 h-32 md:w-32 md:h-44">
+        <svg viewBox="0 0 100 150" className="w-full h-full stroke-white fill-none overflow-visible neon-glow-cyan scale-110" style={{ strokeWidth: '1.5', strokeLinecap: 'round', strokeLinejoin: 'round' }}>
+            {/* Engine Flame with Pulse */}
+            <motion.path
+                d="M45 120 L50 145 L55 120 Z"
+                fill="var(--color-brand-accent)"
+                stroke="var(--color-brand-accent)"
+                className="neon-glow-orange"
+                animate={{ opacity: [0.6, 1, 0.6], scaleY: [0.8, 1.2, 0.8] }}
+                transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+                style={{ transformOrigin: "50% 120px" }}
+            />
+            <motion.path
+                d="M48 120 L50 135 L52 120 Z"
+                fill="white"
+                stroke="none"
+                animate={{ opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 0.4, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            {/* Main Fuselage */}
+            <path d="M50 15 C 70 50 65 100 50 120 C 35 100 30 50 50 15 Z" />
+            <path d="M50 25 C 62 55 58 95 50 110 C 42 95 38 55 50 25 Z" opacity="0.4" />
+
+            {/* Wings */}
+            <path d="M38 80 L15 110 L45 105 Z" />
+            <path d="M62 80 L85 110 L55 105 Z" />
+
+            {/* Details */}
+            <path d="M50 40 L50 55" strokeDasharray="2 2" />
+            <path d="M45 65 L55 65 M42 75 L58 75 M40 85 L60 85" opacity="0.5" />
+            <circle cx="50" cy="45" r="4" />
+            <circle cx="50" cy="45" r="1.5" fill="var(--color-brand-neon-cyan)" stroke="none" className="neon-glow-cyan" />
+
+            {/* Trailing Particles Placeholder (Handled by framer in main component usually, but adding stationary hints here) */}
+            <circle cx="50" cy="155" r="1" opacity="0.4" />
+            <circle cx="45" cy="165" r="0.5" opacity="0.2" />
+            <circle cx="55" cy="160" r="0.8" opacity="0.3" />
+        </svg>
+    </div>
 );
 
 const Experience = () => {
@@ -81,121 +162,282 @@ const Experience = () => {
         offset: ["start start", "end end"]
     });
 
-    const smoothConfig = { stiffness: 40, damping: 15, mass: 1.5 };
-    const BP = [0, 0.08, 0.2, 0.3, 0.4, 0.55, 0.65, 0.75, 0.9, 1];
+    const smoothConfig = { stiffness: 30, damping: 20, mass: 1 };
 
-    const worldYVal = useTransform(scrollYProgress, BP, [0, 0, 0, -32.5, -65, -65, -107.5, -150, -150, -180]);
-    const worldYSpring = useSpring(worldYVal, smoothConfig);
-    const worldY = useTransform(worldYSpring, v => `${v}vh`);
+    // We will use a larger scroll area to give the journey more time
+    // BP = Breakpoints for the journey
+    const BP = [0, 0.15, 0.3, 0.5, 0.65, 0.85, 1];
 
-    const shipXVal = useTransform(scrollYProgress, BP, [-10, 20, 20, 50, 80, 80, 50, 20, 20, 20]);
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Background Parallax
+    const bgY = useTransform(scrollYProgress, [0, 1], ["0vh", "-50vh"]);
+
+    // Spaceship Movement (Curved Path)
+    // Starts top middle, arcs left to station 1, arcs right to station 2, arcs left to station 3, continues down
+    const shipXVal = useTransform(scrollYProgress, BP, isMobile ? [
+        "50vw", "50vw", "50vw", "50vw", "50vw", "50vw", "50vw"
+    ] : [
+        "50vw",  // Start top
+        "40vw",  // Arriving at Station 1 (Grid center point)
+        "40vw",  // Leaving Station 1
+        "60vw",  // Arriving at Station 2 (Grid center point)
+        "60vw",  // Leaving Station 2
+        "45vw",  // Arriving at Station 3 (Grid center point)
+        "45vw"   // End
+    ]);
     const shipXSpring = useSpring(shipXVal, smoothConfig);
-    const shipX = useTransform(shipXSpring, v => `${v}vw`);
 
-    const shipYVal = useTransform(scrollYProgress, BP, [-20, 30, 30, 45, 65, 65, 75, 80, 80, 120]);
+    const shipYVal = useTransform(scrollYProgress, BP, [
+        "10vh",  // Start top
+        "35vh",  // Station 1 Y
+        "35vh",  // Station 1 pause
+        "60vh",  // Station 2 Y
+        "60vh",  // Station 2 pause
+        "85vh",  // Station 3 Y
+        "110vh"  // Fly off screen
+    ]);
     const shipYSpring = useSpring(shipYVal, smoothConfig);
-    const shipY = useTransform(shipYSpring, v => `${v}vh`);
 
-    const shipRotVal = useTransform(scrollYProgress, BP, [135, 90, 90, 110, -90, -90, -110, 90, 90, 180]);
-    const shipRot = useSpring(shipRotVal, smoothConfig);
+    // Spaceship Rotation (tilts based on direction)
+    const shipRotVal = useTransform(scrollYProgress, BP, isMobile ? [
+        180, 180, 180, 180, 180, 180, 180
+    ] : [
+        180, // Pointing straight down
+        210, // Tilting left towards Station 1
+        180, // Straightening out
+        150, // Tilting right towards Station 2
+        180, // Straightening out
+        200, // Tilting left towards Station 3
+        180  // Straight down
+    ]);
+    const shipRotSpring = useSpring(shipRotVal, smoothConfig);
 
-    const op1 = useTransform(scrollYProgress, [0, 0.05, 0.08, 0.2, 0.25, 1], [0, 0, 1, 1, 0, 0]);
-    const y1Val = useTransform(scrollYProgress, [0, 0.05, 0.08, 0.2, 0.25, 1], [30, 30, 0, 0, -30, -30]);
-    const y1 = useTransform(useSpring(y1Val, smoothConfig), v => `${v}px`);
+    // Card Opacities and Scales (Fade in only when ship is at the station)
+    // Station 1: Ship arrives at 0.15, pauses until 0.28
+    const card1OpVal = useTransform(scrollYProgress, [0.12, 0.15, 0.28, 0.32], [0, 1, 1, 0]);
+    const card1Op = useSpring(card1OpVal, { stiffness: 60, damping: 20 });
+    const card1ScaleVal = useTransform(scrollYProgress, [0.12, 0.15, 0.28, 0.32], [0.8, 1, 1, 0.8]);
+    const card1Scale = useSpring(card1ScaleVal, { stiffness: 60, damping: 20 });
 
-    const op2 = useTransform(scrollYProgress, [0, 0.35, 0.4, 0.55, 0.6, 1], [0, 0, 1, 1, 0, 0]);
-    const y2Val = useTransform(scrollYProgress, [0, 0.35, 0.4, 0.55, 0.6, 1], [30, 30, 0, 0, -30, -30]);
-    const y2 = useTransform(useSpring(y2Val, smoothConfig), v => `${v}px`);
+    // Station 2: Ship arrives at 0.5, pauses until 0.63
+    const card2OpVal = useTransform(scrollYProgress, [0.47, 0.5, 0.63, 0.67], [0, 1, 1, 0]);
+    const card2Op = useSpring(card2OpVal, { stiffness: 60, damping: 20 });
+    const card2ScaleVal = useTransform(scrollYProgress, [0.47, 0.5, 0.63, 0.67], [0.8, 1, 1, 0.8]);
+    const card2Scale = useSpring(card2ScaleVal, { stiffness: 60, damping: 20 });
 
-    const op3 = useTransform(scrollYProgress, [0, 0.7, 0.75, 0.9, 0.95, 1], [0, 0, 1, 1, 0, 0]);
-    const y3Val = useTransform(scrollYProgress, [0, 0.7, 0.75, 0.9, 0.95, 1], [30, 30, 0, 0, -30, -30]);
-    const y3 = useTransform(useSpring(y3Val, smoothConfig), v => `${v}px`);
+    // Station 3: Ship arrives at 0.85, pauses until end
+    const card3OpVal = useTransform(scrollYProgress, [0.82, 0.85, 0.98, 1], [0, 1, 1, 0]);
+    const card3Op = useSpring(card3OpVal, { stiffness: 60, damping: 20 });
+    const card3ScaleVal = useTransform(scrollYProgress, [0.82, 0.85, 0.98, 1], [0.8, 1, 1, 0.8]);
+    const card3Scale = useSpring(card3ScaleVal, { stiffness: 60, damping: 20 });
 
-    const stars = useMemo(() => Array.from({ length: 150 }).map((_, i) => ({
+    // Generate static stars
+    const stars = useMemo(() => Array.from({ length: 200 }).map((_, i) => ({
         id: i,
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
-        size: Math.random() * 2 + 1 + 'px',
-        opacity: Math.random() * 0.8 + 0.1
+        size: Math.random() > 0.9 ? '3px' : Math.random() > 0.5 ? '2px' : '1px',
+        opacity: Math.random() * 0.7 + 0.1,
+        animationDelay: `${Math.random() * 5}s`,
+        animationDuration: `${Math.random() * 3 + 2}s`
     })), []);
+
+    // Shooting stars
+    const [shootingStars, setShootingStars] = React.useState([]);
+
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            if (Math.random() > 0.5) { // 50% chance every 4 seconds
+                const newStar = {
+                    id: Date.now(),
+                    top: `${Math.random() * 40}%`,
+                    left: `${Math.random() * 80}%`,
+                };
+                setShootingStars(prev => [...prev.slice(-2), newStar]); // Keep max 3
+
+                // Remove out after animation
+                setTimeout(() => {
+                    setShootingStars(prev => prev.filter(s => s.id !== newStar.id));
+                }, 2000);
+            }
+        }, 4000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Y map position:
+    const mapYVal = useTransform(scrollYProgress, [0, 1], ["0vh", "-300vh"]);
+    const mapYSpring = useSpring(mapYVal, { stiffness: 40, damping: 25 });
 
     return (
         <section
             ref={containerRef}
             className="w-full relative bg-[var(--color-brand-primary)]"
-            style={{ height: '500vh' }}
+            style={{ height: '600vh' }} // Increased height for slower, deeper cinematic experience
         >
-            <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-[var(--color-brand-primary)] box-border">
-                {stars.map(star => (
-                    <div
-                        key={star.id}
-                        className="absolute rounded-full bg-white z-0 pointer-events-none"
-                        style={{ left: star.left, top: star.top, width: star.size, height: star.size, opacity: star.opacity }}
-                    />
-                ))}
+            {/* STICKY VIEWPORT DRIVER */}
+            <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-gradient-to-b from-[#1a0502] via-[#2b0f07] to-[#1a0502] box-border">
 
-                <div className="absolute top-20 md:top-24 w-full text-center z-10 pointer-events-none">
-                    <p className="font-mono text-sm tracking-[0.4em] uppercase text-white/50 mb-4">Journey</p>
-                    <h2 className="text-4xl md:text-6xl font-display text-white drop-shadow-md">
-                        Education & <span className="text-white" style={{ textShadow: '0 0 15px rgba(255,255,255,0.5)' }}>Experience</span>
-                    </h2>
-                </div>
-
-                <motion.div
-                    className="absolute top-0 left-0 w-full h-full pointer-events-none z-20"
-                    style={{ y: worldY }}
-                >
-                    <div className="absolute top-[30vh] left-[20vw] -translate-x-1/2 -translate-y-1/2">
-                        <SchoolIcon />
-                    </div>
-                    <motion.div
-                        className="absolute w-[85vw] md:w-[320px] top-[45vh] md:top-[30vh] left-1/2 md:left-[35vw] -translate-x-1/2 md:translate-x-0 !pointer-events-auto flex flex-col justify-center"
-                        style={{ opacity: op1, y: y1 }}
-                    >
-                        <div className="p-6 md:p-8 rounded-2xl h-full" style={{ background: 'rgba(30, 15, 5, 0.75)', border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 10px 40px rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)' }}>
-                            <h3 className="text-white text-2xl md:text-3xl font-bold mb-3 font-display tracking-widest uppercase">Schooling</h3>
-                            <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed">Completed my school education with a strong foundation in science and mathematics.</p>
-                        </div>
-                    </motion.div>
-
-                    <div className="absolute top-[130vh] left-[80vw] -translate-x-1/2 -translate-y-1/2">
-                        <CollegeIcon />
-                    </div>
-                    <motion.div
-                        className="absolute w-[85vw] md:w-[320px] top-[145vh] md:top-[125vh] left-1/2 md:left-auto md:right-[30vw] -translate-x-1/2 md:translate-x-0 !pointer-events-auto flex flex-col justify-center"
-                        style={{ opacity: op2, y: y2 }}
-                    >
-                        <div className="p-6 md:p-8 rounded-2xl h-full" style={{ background: 'rgba(30, 15, 5, 0.75)', border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 10px 40px rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)' }}>
-                            <h3 className="text-white text-2xl md:text-3xl font-bold mb-3 font-display tracking-widest uppercase">Diploma</h3>
-                            <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed">Pursuing diploma in Computer Engineering, learning programming, web development, and software fundamentals.</p>
-                        </div>
-                    </motion.div>
-
-                    <div className="absolute top-[230vh] left-[20vw] -translate-x-1/2 -translate-y-1/2">
-                        <InternshipIcon />
-                    </div>
-                    <motion.div
-                        className="absolute w-[85vw] md:w-[320px] top-[245vh] md:top-[230vh] left-1/2 md:left-[35vw] -translate-x-1/2 md:translate-x-0 !pointer-events-auto flex flex-col justify-center"
-                        style={{ opacity: op3, y: y3 }}
-                    >
-                        <div className="p-6 md:p-8 rounded-2xl h-full" style={{ background: 'rgba(30, 15, 5, 0.75)', border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 10px 40px rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)' }}>
-                            <h3 className="text-white text-2xl md:text-3xl font-bold mb-3 font-display tracking-widest uppercase">Internship</h3>
-                            <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed">Currently interning at Xpand Ventures, working on real-world websites and frontend projects.</p>
-                        </div>
-                    </motion.div>
+                {/* Parallax Star Background */}
+                <motion.div className="absolute top-0 left-0 w-full h-[200%] pointer-events-none" style={{ y: bgY }}>
+                    {stars.map(star => (
+                        <div
+                            key={star.id}
+                            className="absolute rounded-full bg-white z-0 pointer-events-none"
+                            style={{
+                                left: star.left,
+                                top: star.top,
+                                width: star.size,
+                                height: star.size,
+                                opacity: star.opacity,
+                                boxShadow: star.size === '3px' ? '0 0 4px #fff' : 'none',
+                                animation: `twinkle ${star.animationDuration} infinite alternate`
+                            }}
+                        />
+                    ))}
+                    <style>{`
+                        @keyframes twinkle {
+                            0% { opacity: 0.2; transform: scale(0.8); }
+                            100% { opacity: 1; transform: scale(1.2); }
+                        }
+                        @keyframes shootingStar {
+                            0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; width: 0; }
+                            70% { width: 150px; opacity: 1; }
+                            100% { transform: translateX(-500px) translateY(500px) rotate(-45deg); opacity: 0; width: 0; }
+                        }
+                    `}</style>
                 </motion.div>
 
+                {/* Shooting Stars Layer */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden z-[5]">
+                    {shootingStars.map(star => (
+                        <div
+                            key={star.id}
+                            className="absolute h-[2px] bg-gradient-to-r from-transparent via-white to-transparent"
+                            style={{
+                                top: star.top,
+                                left: star.left,
+                                animation: 'shootingStar 2s ease-out forwards',
+                                transformOrigin: 'right center'
+                            }}
+                        />
+                    ))}
+                </div>
+
+                {/* Title Overlay (Fades out early) */}
+                <motion.div
+                    className="absolute top-16 md:top-24 w-full text-center z-10 pointer-events-none"
+                    style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
+                >
+                    <p className="font-sans text-xs tracking-[0.5em] uppercase text-white/50 mb-4 neon-glow-orange font-light">Journey</p>
+                    <h2 className="text-4xl md:text-6xl font-display text-white neon-glow">
+                        Education & <span className="text-white text-stroke">Experience</span>
+                    </h2>
+                </motion.div>
+
+                {/* THE MAP CONSTRUCT (Moving upwards) */}
+                <motion.div
+                    className="absolute top-0 left-0 w-full pointer-events-none z-20"
+                    style={{ height: '400vh', y: mapYSpring }}
+                >
+
+                    {/* STATION 1: SCHOOL (Left) - Target Gap Center: 40vw */}
+                    <div
+                        className="absolute top-[80vh] left-[50vw] md:left-[40vw] -translate-x-1/2 -translate-y-1/2 
+                                   flex flex-col md:grid items-center gap-10 md:gap-0"
+                        style={{ gridTemplateColumns: 'min-content 15vw auto' }} // Station, Gap(15vw), Card
+                    >
+                        {/* The Station: Grid Col 1 */}
+                        <div className="scale-[0.7] md:scale-[1.5] w-[180px] flex justify-center items-center">
+                            <SchoolStation />
+                        </div>
+                        {/* The Gap is Grid Col 2. We skip it by putting content in Col 3. */}
+                        {/* The Card: Grid Col 3 */}
+                        <motion.div
+                            className="w-[85vw] md:w-[500px] !pointer-events-auto z-40"
+                            style={{ opacity: card1Op, scale: card1Scale, gridColumn: 3 }}
+                        >
+                            <div className="p-6 md:p-10 rounded-2xl h-full glass-card group hover:border-[var(--color-brand-accent)] transition-colors duration-500">
+                                <span className="text-[var(--color-brand-accent)] text-xs md:text-sm font-mono tracking-widest uppercase mb-3 block">// Checkpoint 01</span>
+                                <h3 className="text-white text-3xl md:text-4xl font-display mb-4 neon-glow group-hover:neon-glow-cyan transition-all">School High</h3>
+                                <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed mb-4">Completed foundational education with distinction, sparking an early interest in technology, science, and mathematics.</p>
+                                <p className="text-[var(--color-brand-accent)] font-mono text-sm md:text-base tracking-widest font-bold">» ICSE: 92%</p>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* STATION 2: COLLEGE (Right) - Target Gap Center: 60vw */}
+                    <div
+                        className="absolute top-[210vh] left-[50vw] md:left-[60vw] -translate-x-1/2 -translate-y-1/2 
+                                    flex flex-col md:grid items-center gap-10 md:gap-0"
+                        style={{ gridTemplateColumns: 'auto 15vw min-content' }} // Card, Gap(15vw), Station
+                    >
+                        {/* The Card: Grid Col 1 */}
+                        <motion.div
+                            className="w-[85vw] md:w-[500px] !pointer-events-auto z-40"
+                            style={{ opacity: card2Op, scale: card2Scale, gridColumn: 1 }}
+                        >
+                            <div className="p-6 md:p-10 rounded-2xl h-full glass-card group hover:border-[var(--color-brand-accent)] transition-colors duration-500 md:text-right">
+                                <span className="text-[var(--color-brand-neon-pink)] text-xs md:text-sm font-mono tracking-widest uppercase mb-3 block">// Checkpoint 02</span>
+                                <h3 className="text-white text-3xl md:text-4xl font-display mb-4 group-hover:neon-glow transition-all" style={{ textShadow: '0 0 10px rgba(255,0,255,0.8)' }}>Govt. Poly. Mumbai</h3>
+                                <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed mb-4">Pursuing a Diploma in Computer Engineering. Deep diving into system architecture, web development technologies, and software engineering principles.</p>
+                                <p className="text-[var(--color-brand-neon-pink)] font-mono text-sm md:text-base tracking-widest font-bold">» AGGREGATE: 89%</p>
+                            </div>
+                        </motion.div>
+                        {/* The Gap is Grid Col 2 */}
+                        {/* The Station: Grid Col 3 */}
+                        <div className="scale-[0.7] md:scale-[1.5] w-[180px] flex justify-center items-center" style={{ gridColumn: 3 }}>
+                            <CollegeStation />
+                        </div>
+                    </div>
+
+                    {/* STATION 3: INTERNSHIP (Center-Left) - Target Gap Center: 45vw */}
+                    <div
+                        className="absolute top-[340vh] left-[50vw] md:left-[45vw] -translate-x-1/2 -translate-y-1/2 
+                                    flex flex-col md:grid items-center gap-10 md:gap-0"
+                        style={{ gridTemplateColumns: 'min-content 15vw auto' }} // Station, Gap(15vw), Card
+                    >
+                        {/* The Station: Grid Col 1 */}
+                        <div className="scale-[0.7] md:scale-[1.5] w-[180px] flex justify-center items-center">
+                            <InternshipStation />
+                        </div>
+                        {/* The Gap is Grid Col 2 */}
+                        {/* The Card: Grid Col 3 */}
+                        <motion.div
+                            className="w-[85vw] md:w-[500px] !pointer-events-auto z-40"
+                            style={{ opacity: card3Op, scale: card3Scale, gridColumn: 3 }}
+                        >
+                            <div className="p-6 md:p-10 rounded-2xl h-full glass-card group hover:border-[var(--color-brand-neon-cyan)] transition-colors duration-500">
+                                <span className="text-[var(--color-brand-neon-cyan)] text-xs md:text-sm font-mono tracking-widest uppercase mb-3 block">// Checkpoint 03</span>
+                                <h3 className="text-white text-3xl md:text-4xl font-display mb-4 neon-glow-cyan group-hover:neon-glow-cyan transition-all">Xpand Ventures</h3>
+                                <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed">Currently engaged as a Frontend Developer Intern. Building high-performance, real-world web applications and directly impacting user experience design.</p>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                </motion.div>
+
+                {/* THE SPACESHIP (Moving across viewport relative to overall scroll) */}
                 <motion.div
                     className="absolute z-30 pointer-events-none"
                     style={{
-                        left: shipX,
-                        top: shipY,
+                        left: shipXSpring,
+                        top: shipYSpring,
                         x: "-50%",
                         y: "-50%",
-                        rotate: shipRot
+                        rotate: shipRotSpring
                     }}
                 >
-                    <SpaceshipIcon />
+                    <div className="scale-[0.6] md:scale-100 origin-center transition-transform">
+                        <Spaceship />
+                    </div>
                 </motion.div>
             </div>
         </section>
