@@ -57,10 +57,10 @@ const Hero = () => {
                     transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
                     className="font-display w-full max-w-5xl text-center leading-tight select-none text-white px-4 drop-shadow-2xl"
                     style={{
-                        fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
+                        fontSize: 'clamp(2rem, 4.5vw, 4rem)',
                     }}
                 >
-                    I craft mordern, <span className="text-[var(--color-brand-cream)] italic">interactive digital experiences.</span>
+                    I craft modern, <span className="text-[var(--color-brand-cream)] italic">interactive digital experiences.</span>
                 </motion.h1>
 
                 {/* Tagline */}
