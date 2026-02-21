@@ -3,126 +3,127 @@ import { motion } from 'framer-motion';
 
 const skillsData = [
     {
-        category: "Primary Skills",
-        items: ["Java", "Python", "JavaScript", "HTML", "CSS", "AI (Basic Concepts)"],
-        color: "var(--color-brand-neon-cyan)"
+        category: "Frontend",
+        color: "var(--color-brand-accent)",
+        items: [
+            { name: "React / Next.js", level: 3 },
+            { name: "JavaScript (ES6+)", level: 3 },
+            { name: "Tailwind CSS", level: 3 },
+            { name: "HTML5 / CSS3", level: 3 },
+            { name: "Framer Motion", level: 2 },
+        ]
     },
     {
-        category: "Secondary Skills",
-        items: ["Flutter", "C", "MySQL", "Firebase", "MongoDB"],
-        color: "var(--color-brand-neon-pink)"
+        category: "Backend & DB",
+        color: "var(--color-brand-neon-cyan)",
+        items: [
+            { name: "Node.js", level: 2 },
+            { name: "Python", level: 2 },
+            { name: "Java", level: 2 },
+            { name: "MongoDB", level: 2 },
+            { name: "MySQL", level: 2 },
+        ]
+    },
+    {
+        category: "Tools & Others",
+        color: "var(--color-brand-cream)",
+        items: [
+            { name: "Git & GitHub", level: 3 },
+            { name: "Figma", level: 2 },
+            { name: "VS Code", level: 3 },
+            { name: "Vite", level: 3 },
+            { name: "Postman", level: 2 },
+        ]
     }
 ];
 
-const SkillCard = ({ category, items, color, className = "" }) => {
+const ProficiencyDots = ({ level, color }) => {
+    return (
+        <div className="flex gap-1">
+            {[1, 2, 3].map((dot) => (
+                <div
+                    key={dot}
+                    className={`w-2 h-2 rounded-full ${dot <= level ? '' : 'opacity-20'}`}
+                    style={{ backgroundColor: dot <= level ? color : 'white' }}
+                />
+            ))}
+        </div>
+    );
+};
+
+const SkillCard = ({ category, items, color, index }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -8 }}
-            transition={{ duration: 0.5 }}
-            className={`group w-full max-w-[300px] glass-card rounded-2xl p-8 flex flex-col gap-6 relative overflow-hidden interactive ${className}`}
-            style={{ border: `1px solid ${color}50` }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            className="w-full glass-card rounded-2xl p-6 md:p-8 flex flex-col gap-6 relative overflow-hidden group border border-white/5 hover:border-white/20 transition-colors"
         >
-            {/* Subtle dark backing for readability */}
-            <div className="absolute inset-0 bg-black/40 rounded-2xl z-0"></div>
+            {/* Subtle header line */}
+            <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: color, opacity: 0.8 }}></div>
 
-            {/* Neon Glow on Hover */}
-            <div
-                className="absolute -inset-1 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 rounded-2xl"
-                style={{ backgroundColor: color }}
-            ></div>
-
-            <h3 className="text-3xl font-display z-10" style={{ color }}>
+            <h3 className="text-2xl font-display text-white tracking-wide" style={{ textShadow: `0 0 10px ${color}80` }}>
                 {category}
             </h3>
 
-            <ul className="space-y-3 z-10">
-                {items.map((item, index) => (
-                    <motion.li
-                        key={index}
-                        initial={{ opacity: 0, x: -15 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.08 }}
-                        className="flex items-center space-x-3 text-base font-sans text-white/85"
+            <div className="space-y-4">
+                {items.map((item, idx) => (
+                    <motion.div
+                        key={idx}
+                        className="flex items-center justify-between group/item"
                     >
-                        <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: color }}></span>
-                        <span>{item}</span>
-                    </motion.li>
+                        <span className="text-base font-sans text-white/80 group-hover/item:text-white transition-colors">
+                            {item.name}
+                        </span>
+                        <ProficiencyDots level={item.level} color={color} />
+                    </motion.div>
                 ))}
-            </ul>
+            </div>
         </motion.div>
     );
 };
 
 const Skills = () => {
     return (
-        <section
-            className="relative min-h-screen w-full flex flex-col items-center justify-start pt-12 md:pt-7 overflow-hidden"
-            style={{
-                backgroundImage: "url('/images/skills-bg.png?v=2')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat"
-            }}
-        >
-            {/*
-              The background image already contains the hand-drawn doodle lines.
-              Layout:
-                - Left doodle lives in roughly the left 25% of the image.
-                - Right doodle lives in roughly the right 20% of the image.
-                - Centre arrow points between the two cards.
-              So we push content into the middle 55% — using px-[22%] to keep
-              the cards away from the drawn lines on either side.
-            */}
-            <div className="relative z-10 w-full flex flex-col items-center pb-20 px-4">
+        <section className="relative min-h-screen w-full flex flex-col items-center justify-center py-20 px-4 z-10 overflow-hidden">
 
-                {/* SKILLS title — centred, sits in the clear top area */}
-                <motion.h2
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-5xl md:text-9xl font-display text-[var(--color-brand-accent)] neon-glow mb-8 md:mb-12 text-center"
-                >
+            {/* Background SKILLS text */}
+            <div className="absolute top-[8%] left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none select-none z-0 overflow-hidden">
+                <span className="text-outline-bg" style={{ fontSize: 'clamp(4rem, 16vw, 15rem)', opacity: 0.35 }}>
                     SKILLS
-                </motion.h2>
+                </span>
+            </div>
 
-                {/* Cards in the centre corridor — clear of left & right doodles */}
-                <div className="w-full grid md:grid-cols-2 gap-8 md:gap-10 pl-4 md:pl-[25%] pr-4 md:pr-[20%] justify-items-center">
+            <div className="container mx-auto max-w-6xl relative z-10">
+
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-16 md:mb-24 text-center"
+                >
+                    <h2 className="text-4xl md:text-5xl font-display text-white neon-glow">
+                        Technical <span className="text-white text-stroke">Arsenal</span>
+                    </h2>
+                    <p className="font-sans text-white/60 mt-4 max-w-2xl mx-auto uppercase tracking-widest text-xs md:text-sm">
+                        Beginner <span className="mx-2 text-[var(--color-brand-accent)]">•</span>
+                        Intermediate <span className="mx-2 text-[var(--color-brand-accent)]">•</span>
+                        Advanced
+                    </p>
+                </motion.div>
+
+                {/* Skills Grid */}
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {skillsData.map((skill, index) => (
                         <SkillCard
                             key={index}
                             {...skill}
-                            className={index === 0 ? "md:-translate-x-12" : "md:-translate-x-12"}
+                            index={index}
                         />
                     ))}
                 </div>
-            </div>
-
-            {/* Vertical "Checkout My" and "Works" text */}
-            <div className="absolute right-4 md:right-[2%] top-[10%] md:top-[15%] hidden md:flex h-full items-start gap-2 pointer-events-none z-20">
-                <p
-                    className="text-4xl md:text-5xl font-sans font-light tracking-wide uppercase origin-center opacity-80 whitespace-nowrap mt-48"
-                    style={{
-                        writingMode: 'vertical-rl',
-                        textOrientation: 'mixed',
-                        WebkitTextStroke: '1px rgba(255, 255, 255, 0.4)',
-                        color: 'transparent'
-                    }}
-                >
-                    WORKS
-                </p>
-                <p
-                    className="text-4xl md:text-5xl font-sans font-light tracking-wide uppercase origin-center opacity-80 whitespace-nowrap"
-                    style={{
-                        writingMode: 'vertical-rl',
-                        textOrientation: 'mixed',
-                        WebkitTextStroke: '1px rgba(255, 255, 255, 0.4)',
-                        color: 'transparent'
-                    }}
-                >
-                    CHECKOUT MY
-                </p>
             </div>
         </section>
     );

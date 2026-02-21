@@ -283,7 +283,7 @@ const Experience = () => {
             style={{ height: '600vh' }} // Increased height for slower, deeper cinematic experience
         >
             {/* STICKY VIEWPORT DRIVER */}
-            <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-gradient-to-b from-[#1a0502] via-[#2b0f07] to-[#1a0502] box-border">
+            <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-[var(--color-brand-primary)] box-border">
 
                 {/* Parallax Star Background */}
                 <motion.div className="absolute top-0 left-0 w-full h-[200%] pointer-events-none" style={{ y: bgY }}>
@@ -336,7 +336,7 @@ const Experience = () => {
                     className="absolute top-16 md:top-24 w-full text-center z-10 pointer-events-none"
                     style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
                 >
-                    <p className="font-sans text-xs tracking-[0.5em] uppercase text-white/50 mb-4 neon-glow-orange font-light">Journey</p>
+                    <p className="font-sans text-xs tracking-[0.5em] uppercase text-white/50 mb-4 font-light">Journey</p>
                     <h2 className="text-4xl md:text-6xl font-display text-white neon-glow">
                         Education & <span className="text-white text-stroke">Experience</span>
                     </h2>
@@ -350,48 +350,44 @@ const Experience = () => {
 
                     {/* STATION 1: SCHOOL (Left) - Target Gap Center: 40vw */}
                     <div
-                        className="absolute top-[80vh] left-[50vw] md:left-[40vw] -translate-x-1/2 -translate-y-1/2 
-                                   flex flex-col md:grid items-center gap-10 md:gap-0"
-                        style={{ gridTemplateColumns: 'min-content 15vw auto' }} // Station, Gap(15vw), Card
+                        className="absolute top-[80vh] left-[50vw] md:left-[40vw] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-10 md:gap-0"
+                        style={!isMobile ? { display: 'grid', gridTemplateColumns: 'min-content 15vw auto' } : {}}
                     >
                         {/* The Station: Grid Col 1 */}
                         <div className="scale-[0.7] md:scale-[1.5] w-[180px] flex justify-center items-center">
                             <SchoolStation />
                         </div>
-                        {/* The Gap is Grid Col 2. We skip it by putting content in Col 3. */}
                         {/* The Card: Grid Col 3 */}
                         <motion.div
                             className="w-[85vw] md:w-[500px] !pointer-events-auto z-40"
                             style={{ opacity: card1Op, scale: card1Scale, gridColumn: 3 }}
                         >
-                            <div className="p-6 md:p-10 rounded-2xl h-full glass-card group hover:border-[var(--color-brand-accent)] transition-colors duration-500">
-                                <span className="text-[var(--color-brand-accent)] text-xs md:text-sm font-mono tracking-widest uppercase mb-3 block">// Checkpoint 01</span>
-                                <h3 className="text-white text-3xl md:text-4xl font-display mb-4 neon-glow group-hover:neon-glow-cyan transition-all">School High</h3>
-                                <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed mb-4">Completed foundational education with distinction, sparking an early interest in technology, science, and mathematics.</p>
-                                <p className="text-[var(--color-brand-accent)] font-mono text-sm md:text-base tracking-widest font-bold">» ICSE: 92%</p>
+                            <div className="p-6 md:p-8 rounded-2xl h-full glass-card group border border-white/5 hover:border-white/20 transition-all duration-500">
+                                <span className="text-[var(--color-brand-accent)] text-xs md:text-sm font-sans tracking-widest uppercase mb-3 block">01 / High School</span>
+                                <h3 className="text-white   text-2xl md:text-3xl font-display mb-3">Foundations & Physics</h3>
+                                <p className="text-white/70 text-sm md:text-base font-sans font-light leading-relaxed mb-4">Completed foundational education with distinction, sparking an early interest in technology, science, and mathematics.</p>
+                                <p className="text-white font-mono text-sm tracking-widest bg-white/5 inline-block px-3 py-1 rounded">ICSE: 92%</p>
                             </div>
                         </motion.div>
                     </div>
 
                     {/* STATION 2: COLLEGE (Right) - Target Gap Center: 60vw */}
                     <div
-                        className="absolute top-[210vh] left-[50vw] md:left-[60vw] -translate-x-1/2 -translate-y-1/2 
-                                    flex flex-col md:grid items-center gap-10 md:gap-0"
-                        style={{ gridTemplateColumns: 'auto 15vw min-content' }} // Card, Gap(15vw), Station
+                        className="absolute top-[210vh] left-[50vw] md:left-[60vw] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-10 md:gap-0"
+                        style={!isMobile ? { display: 'grid', gridTemplateColumns: 'auto 15vw min-content' } : {}}
                     >
                         {/* The Card: Grid Col 1 */}
                         <motion.div
                             className="w-[85vw] md:w-[500px] !pointer-events-auto z-40"
                             style={{ opacity: card2Op, scale: card2Scale, gridColumn: 1 }}
                         >
-                            <div className="p-6 md:p-10 rounded-2xl h-full glass-card group hover:border-[var(--color-brand-accent)] transition-colors duration-500 md:text-right">
-                                <span className="text-[var(--color-brand-neon-pink)] text-xs md:text-sm font-mono tracking-widest uppercase mb-3 block">// Checkpoint 02</span>
-                                <h3 className="text-white text-3xl md:text-4xl font-display mb-4 group-hover:neon-glow transition-all" style={{ textShadow: '0 0 10px rgba(255,0,255,0.8)' }}>Govt. Poly. Mumbai</h3>
-                                <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed mb-4">Pursuing a Diploma in Computer Engineering. Deep diving into system architecture, web development technologies, and software engineering principles.</p>
-                                <p className="text-[var(--color-brand-neon-pink)] font-mono text-sm md:text-base tracking-widest font-bold">» AGGREGATE: 89%</p>
+                            <div className="p-6 md:p-8 rounded-2xl h-full glass-card group border border-white/5 hover:border-[var(--color-brand-cyan)] transition-all duration-500 md:text-right">
+                                <span className="text-[var(--color-brand-neon-cyan)] text-xs md:text-sm font-sans tracking-widest uppercase mb-3 block">02 / Diploma</span>
+                                <h3 className="text-white text-2xl md:text-3xl font-display mb-3">Govt. Polytechnic Mumbai</h3>
+                                <p className="text-white/70 text-sm md:text-base font-sans font-light leading-relaxed mb-4">Pursuing a Diploma in Computer Engineering. Deep diving into system architecture, web development technologies, and software engineering principles.</p>
+                                <p className="text-white font-mono text-sm tracking-widest bg-[#00eaff]/10 border border-[#00eaff]/20 inline-block px-3 py-1 rounded">AGGREGATE: 89%</p>
                             </div>
                         </motion.div>
-                        {/* The Gap is Grid Col 2 */}
                         {/* The Station: Grid Col 3 */}
                         <div className="scale-[0.7] md:scale-[1.5] w-[180px] flex justify-center items-center" style={{ gridColumn: 3 }}>
                             <CollegeStation />
@@ -400,24 +396,22 @@ const Experience = () => {
 
                     {/* STATION 3: INTERNSHIP (Center-Left) - Target Gap Center: 45vw */}
                     <div
-                        className="absolute top-[340vh] left-[50vw] md:left-[45vw] -translate-x-1/2 -translate-y-1/2 
-                                    flex flex-col md:grid items-center gap-10 md:gap-0"
-                        style={{ gridTemplateColumns: 'min-content 15vw auto' }} // Station, Gap(15vw), Card
+                        className="absolute top-[340vh] left-[50vw] md:left-[45vw] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-10 md:gap-0"
+                        style={!isMobile ? { display: 'grid', gridTemplateColumns: 'min-content 15vw auto' } : {}}
                     >
                         {/* The Station: Grid Col 1 */}
                         <div className="scale-[0.7] md:scale-[1.5] w-[180px] flex justify-center items-center">
                             <InternshipStation />
                         </div>
-                        {/* The Gap is Grid Col 2 */}
                         {/* The Card: Grid Col 3 */}
                         <motion.div
                             className="w-[85vw] md:w-[500px] !pointer-events-auto z-40"
                             style={{ opacity: card3Op, scale: card3Scale, gridColumn: 3 }}
                         >
-                            <div className="p-6 md:p-10 rounded-2xl h-full glass-card group hover:border-[var(--color-brand-neon-cyan)] transition-colors duration-500">
-                                <span className="text-[var(--color-brand-neon-cyan)] text-xs md:text-sm font-mono tracking-widest uppercase mb-3 block">// Checkpoint 03</span>
-                                <h3 className="text-white text-3xl md:text-4xl font-display mb-4 neon-glow-cyan group-hover:neon-glow-cyan transition-all">Xpand Ventures</h3>
-                                <p className="text-white/80 text-sm md:text-lg font-sans font-light leading-relaxed">Currently engaged as a Frontend Developer Intern. Building high-performance, real-world web applications and directly impacting user experience design.</p>
+                            <div className="p-6 md:p-8 rounded-2xl h-full glass-card group border border-white/5 hover:border-[var(--color-brand-accent)] transition-all duration-500">
+                                <span className="text-[var(--color-brand-accent)] text-xs md:text-sm font-sans tracking-widest uppercase mb-3 block">03 / Experience</span>
+                                <h3 className="text-white text-2xl md:text-3xl font-display mb-3">Xpand Ventures Intern</h3>
+                                <p className="text-white/70 text-sm md:text-base font-sans font-light leading-relaxed">Currently engaged as a Frontend Developer Intern. Building high-performance, real-world web applications and directly impacting user experience design.</p>
                             </div>
                         </motion.div>
                     </div>

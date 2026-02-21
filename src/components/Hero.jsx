@@ -19,6 +19,13 @@ const Hero = () => {
                 style={{ objectPosition: 'center 20%' }}
             />
 
+            {/* Background DARSHAN text */}
+            <div className="absolute top-[20%] w-full flex justify-center pointer-events-none select-none overflow-hidden z-0">
+                <span className="text-outline-bg" style={{ fontSize: 'clamp(5rem, 16vw, 14rem)', opacity: 0.45 }}>
+                    DARSHAN
+                </span>
+            </div>
+
             {/* Dark tint on the upper area so text pops */}
             <div
                 className="absolute inset-0 pointer-events-none"
@@ -30,36 +37,44 @@ const Hero = () => {
             {/* Text overlay */}
             <div className="absolute inset-0 flex flex-col items-center" style={{ paddingTop: '7vh' }}>
 
-                {/* SOFTWARE DEVELOPER label */}
+                {/* Role label */}
                 <motion.p
                     initial={{ opacity: 0, y: -12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.4 }}
-                    className="font-sans uppercase text-[var(--color-brand-cream)] mb-2"
+                    className="font-sans text-[var(--color-brand-accent)] mb-4 md:mb-6 uppercase tracking-widest font-bold"
                     style={{
-                        fontSize: 'clamp(0.6rem, 1.1vw, 0.85rem)',
-                        letterSpacing: '0.45em',
+                        fontSize: 'clamp(0.7rem, 1.2vw, 0.9rem)',
                     }}
                 >
-                    Software Developer
+                    Software Developer / Computer Engineering Student
                 </motion.p>
 
-                {/* DARSHAN — giant outlined stroke text */}
+                {/* Main Headline */}
                 <motion.h1
                     initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
-                    className="font-display w-full text-center leading-none select-none"
+                    className="font-display w-full max-w-5xl text-center leading-tight select-none text-white px-4 drop-shadow-2xl"
                     style={{
-                        fontSize: 'clamp(4rem, 14vw, 18rem)',
-                        color: 'transparent',
-                        WebkitTextStroke: '2px rgba(245, 230, 211, 0.92)',
-                        letterSpacing: '0.02em',
-                        lineHeight: 0.9,
+                        fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
                     }}
                 >
-                    DARSHAN
+                    I craft mordern, <span className="text-[var(--color-brand-cream)] italic">interactive digital experiences.</span>
                 </motion.h1>
+
+                {/* Tagline */}
+                <motion.p
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, delay: 0.8 }}
+                    className="font-sans text-white/80 mt-6 max-w-2xl text-center px-6 leading-relaxed"
+                    style={{
+                        fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
+                    }}
+                >
+                    I combine design, development, and intelligent systems to create fast, engaging, and user-focused digital products.
+                </motion.p>
             </div>
 
             {/* CTA Buttons */}
@@ -69,22 +84,20 @@ const Hero = () => {
                 transition={{ duration: 0.8, delay: 1 }}
                 className="absolute bottom-12 md:bottom-20 w-full flex justify-center gap-16 md:gap-[32rem] px-4 pointer-events-none"
             >
-                {/* Resume Button */}
+                {/* Primary CTA Button */}
                 <a
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="pointer-events-auto w-36 md:w-48 py-3 md:py-4 border border-white/30 backdrop-blur-sm text-[var(--color-brand-cream)] text-center font-sans tracking-[0.2em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-all duration-500 rounded-sm"
+                    href="#projects"
+                    className="pointer-events-auto w-40 md:w-56 py-3 md:py-4 bg-[var(--color-brand-accent)] text-white text-center font-sans tracking-[0.15em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-colors duration-500 rounded-sm shadow-lg shadow-[var(--color-brand-accent)]/20"
                 >
-                    Resume
+                    View My Work
                 </a>
 
-                {/* Connect Button */}
+                {/* Secondary CTA Button */}
                 <a
                     href="#contact"
-                    className="pointer-events-auto w-36 md:w-48 py-3 md:py-4 border border-white/30 backdrop-blur-sm text-[var(--color-brand-cream)] text-center font-sans tracking-[0.2em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-all duration-500 rounded-sm hover:-translate-y-1"
+                    className="pointer-events-auto w-40 md:w-56 py-3 md:py-4 border border-white/40 backdrop-blur-md text-white text-center font-sans tracking-[0.15em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-colors duration-500 rounded-sm"
                 >
-                    Connect
+                    Contact Me
                 </a>
             </motion.div>
         </section>

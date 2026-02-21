@@ -3,19 +3,18 @@
 @theme {
   --font-sans: "Outfit", sans-serif;
   --font-display: "Quintessential", serif;
-  /* Removed unused fonts to strictly adhere to max 2 fonts rule */
 
   /* Color Palette */
   --color-brand-dark: #1a0502;
   /* Deep coffee/brown */
   --color-brand-primary: #2b0f07;
-  /* Slightly lighter brown for gradients */
+  /* Slightly lighter brown */
   --color-brand-accent: #ff5500;
   /* Warm Orange */
   --color-brand-cream: #f5e6d3;
   /* Soft Cream */
-  --color-brand-neon-cyan: #00ffff;
-  --color-brand-neon-pink: #ff00ff;
+  --color-brand-neon-cyan: #00eaff;
+  /* Single Neon Color */
 }
 
 @layer base {
@@ -32,10 +31,9 @@
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     cursor: none;
-    /* Hide default cursor for custom one */
+    /* Custom cursor used in App.jsx */
   }
 
-  /* Titles */
   h1,
   h2,
   h3,
@@ -45,7 +43,6 @@
   .font-display {
     font-family: var(--font-display);
     font-weight: 400;
-    /* Quintessential is standard weight usually */
   }
 
   /* Noise Overlay */
@@ -63,7 +60,7 @@
   }
 }
 
-/* Utility Classes */
+/* Base Glassmorphism utility used globally */
 .glass-card {
   background: rgba(30, 15, 5, 0.45);
   backdrop-filter: blur(12px);
@@ -72,18 +69,30 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
+/* Background Outline Text Utility */
+.text-outline-bg {
+  font-family: "Inter", "Helvetica Neue", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.30);
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1.1;
+}
+
 .text-stroke {
   -webkit-text-stroke: 1px var(--color-brand-cream);
   color: transparent;
 }
 
 .neon-glow {
-  text-shadow: 0 0 10px var(--color-brand-accent), 0 0 20px var(--color-brand-accent);
+  text-shadow: 0 0 10px rgba(255, 85, 0, 0.6), 0 0 20px rgba(255, 85, 0, 0.4);
 }
 
-/* Specific glows */
 .neon-glow-cyan {
-  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.6);
+  filter: drop-shadow(0 0 8px rgba(0, 234, 255, 0.6));
 }
 
 .neon-glow-orange {
