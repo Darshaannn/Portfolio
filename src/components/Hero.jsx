@@ -57,7 +57,7 @@ const Hero = () => {
                     transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
                     className="font-display w-full max-w-5xl text-center leading-tight select-none text-white px-4 drop-shadow-2xl"
                     style={{
-                        fontSize: 'clamp(2rem, 4.5vw, 4rem)',
+                        fontSize: 'clamp(1.75rem, 4vw, 3.5rem)',
                     }}
                 >
                     I craft modern, <span className="text-[var(--color-brand-cream)] italic">interactive digital experiences.</span>
@@ -70,7 +70,7 @@ const Hero = () => {
                     transition={{ duration: 0.7, delay: 0.8 }}
                     className="font-sans text-white/80 mt-6 max-w-2xl text-center px-6 leading-relaxed"
                     style={{
-                        fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
+                        fontSize: 'clamp(0.9rem, 1.2vw, 1.15rem)',
                     }}
                 >
                     I combine design, development, and intelligent systems to create fast, engaging, and user-focused digital products.
@@ -87,7 +87,7 @@ const Hero = () => {
                 {/* Primary CTA Button */}
                 <a
                     href="#projects"
-                    className="pointer-events-auto w-40 md:w-56 py-3 md:py-4 bg-[var(--color-brand-accent)] text-white text-center font-sans tracking-[0.15em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-colors duration-500 rounded-sm shadow-lg shadow-[var(--color-brand-accent)]/20"
+                    className="pointer-events-auto w-32 md:w-44 py-3 md:py-3 bg-[var(--color-brand-accent)] text-white text-center font-sans tracking-[0.15em] text-[10px] md:text-xs uppercase hover:bg-white hover:text-[#1a0502] transition-colors duration-500 rounded-sm shadow-lg shadow-[var(--color-brand-accent)]/20"
                 >
                     View My Work
                 </a>
@@ -95,7 +95,7 @@ const Hero = () => {
                 {/* Secondary CTA Button */}
                 <a
                     href="#contact"
-                    className="pointer-events-auto w-40 md:w-56 py-3 md:py-4 border border-white/40 backdrop-blur-md text-white text-center font-sans tracking-[0.15em] text-xs md:text-sm uppercase hover:bg-white hover:text-[#1a0502] transition-colors duration-500 rounded-sm"
+                    className="pointer-events-auto w-32 md:w-44 py-3 md:py-3 border border-white/40 backdrop-blur-md text-white text-center font-sans tracking-[0.15em] text-[10px] md:text-xs uppercase hover:bg-white hover:text-[#1a0502] transition-colors duration-500 rounded-sm"
                 >
                     Contact Me
                 </a>
